@@ -1,9 +1,12 @@
 package model;
 
 public class Voiture extends Vehicule  {
+    public Voiture() {
+        System.out.println("FABRICATION VOITURE");
+    }
+
     @Override
     public void demarrer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'demarrer'");
+        System.out.println("La voiture démarre ...");
     }
 }
