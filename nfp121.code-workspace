@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "rappels-java"
+		},
+		{
+			"path": "rappels-poo"
 		}
 	],
 	"settings": {
