@@ -18,8 +18,6 @@ public class GeneriqueApplication {
             vehicules.get(i).demarrer();
         }
 
-        
-
         // int i = 0;
         // for (System.out.println("Coucou"); i < 5; System.out.println("Fin passage")) {
         //     i++;
@@ -33,8 +31,6 @@ public class GeneriqueApplication {
         for (int i = 0; i < vehicules.size(); i++) {
             vehicules.get(i).demarrer();
         }
-
-
 
         for (Vehicule v : vehicules) {
             v.demarrer();
