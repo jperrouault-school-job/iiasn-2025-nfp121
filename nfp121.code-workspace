@@ -17,6 +17,9 @@
 		},
 		{
 			"path": "demo-builder"
+		},
+		{
+			"path": "exo-bitwise-boolean"
 		}
 	],
 	"settings": {
