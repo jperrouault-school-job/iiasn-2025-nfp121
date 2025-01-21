@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "exo-factory"
+		},
+		{
+			"path": "exo-singleton"
 		}
 	],
 	"settings": {
