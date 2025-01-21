@@ -23,5 +23,21 @@ public class BitwiseApplication {
 
         System.out.println("Valeur numérique : " + result);
         System.out.println("Valeur binaire : " + Integer.toBinaryString(result));
+
+        System.out.println("Solution #1 pour la lecture");
+
+        // System.out.println(Integer.toBinaryString( result & (1 << 2) ));
+        System.out.println((result & (1 << 2)) > 0);
+        System.out.println((result & (1 << 1)) > 0);
+        // System.out.println((result & (1 << 0)) > 0);
+        System.out.println((result & 1) > 0);
+        
+        System.out.println("Solution #2 pour la lecture");
+        
+        // System.out.println(Integer.toBinaryString( 1 & result >> 2 ));
+        System.out.println( (1 & result >> 2) == 1 );
+        System.out.println( (1 & result >> 1) == 1 );
+        // System.out.println( (1 & result >> 0) == 1 );
+        System.out.println( (1 & result) == 1 );
     }
 }
