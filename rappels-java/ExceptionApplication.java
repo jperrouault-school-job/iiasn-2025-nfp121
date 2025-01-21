@@ -1,7 +1,6 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class ExceptionApplication {
     // Le mot-clé "throws", à ajouter dans la signature d'une méthode, pour indiquer que vous ne gérez pas l'erreur
@@ -50,7 +49,14 @@ public class ExceptionApplication {
 
         // Syntaxe try-with-resources
         try (FileInputStream fis = new FileInputStream("/workspace/demo-builder/pom.xml")) {
-            tab[3] = 52;
+            // tab[3] = 52;
+            // fis.read() // Retourne un entier
+
+            // Tant que .read() != -1 > c'est que j'ai une suite
+            while (fis.read() != -1) {
+
+            }
+
         }
 
         catch (FileNotFoundException e) {
