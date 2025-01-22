@@ -29,6 +29,9 @@
 		},
 		{
 			"path": "exo-json-http"
+		},
+		{
+			"path": "tp-http-proxy"
 		}
 	],
 	"settings": {
