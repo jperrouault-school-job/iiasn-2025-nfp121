@@ -24,7 +24,7 @@ public class SocketServerApplication {
 
             System.out.println("Valeur reçue : " + value);
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 97; i < 107; i++) {
                 client.getOutputStream().write(i);
                 Thread.sleep(1000);
             }
