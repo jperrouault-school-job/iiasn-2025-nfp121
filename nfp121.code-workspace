@@ -20,6 +20,15 @@
 		},
 		{
 			"path": "exo-bitwise-boolean"
+		},
+		{
+			"path": "exo-http-image"
+		},
+		{
+			"path": "exo-json"
+		},
+		{
+			"path": "exo-json-http"
 		}
 	],
 	"settings": {
