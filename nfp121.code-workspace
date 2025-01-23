@@ -32,6 +32,9 @@
 		},
 		{
 			"path": "tp-http-proxy"
+		},
+		{
+			"path": "exo-thread-file-copy"
 		}
 	],
 	"settings": {
