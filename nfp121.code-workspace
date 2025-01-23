@@ -1,39 +1,55 @@
 {
 	"folders": [
 		{
+			"name": "rappels-java",
 			"path": "rappels-java"
 		},
 		{
+			"name": "rappels-poo",
 			"path": "rappels-poo"
 		},
 		{
+			"name": "exo-factory",
 			"path": "exo-factory"
 		},
 		{
+			"name": "exo-singleton",
 			"path": "exo-singleton"
 		},
 		{
+			"name": "exo-builder",
 			"path": "exo-builder"
 		},
 		{
+			"name": "demo-builder",
 			"path": "demo-builder"
 		},
 		{
+			"name": "exo-bitwise-boolean",
 			"path": "exo-bitwise-boolean"
 		},
 		{
+			"name": "exo-http-image",
 			"path": "exo-http-image"
 		},
 		{
+			"name": "exo-json",
 			"path": "exo-json"
 		},
 		{
+			"name": "exo-json-http",
 			"path": "exo-json-http"
 		},
 		{
+			"name": "tp-http-proxy",
 			"path": "tp-http-proxy"
 		},
 		{
+			"name": "exo-socket-file-copy",
+			"path": "exo-socket-file-copy"
+		},
+		{
+			"name": "exo-thread-file-copy",
 			"path": "exo-thread-file-copy"
 		}
 	],
