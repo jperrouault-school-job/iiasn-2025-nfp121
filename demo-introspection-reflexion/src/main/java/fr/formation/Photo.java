@@ -8,10 +8,12 @@ public class Photo {
         this.title = title;
     }
 
+    @MonAnnotation
     public void demo() {
         System.out.println("Rien");
     }
 
+    @MonAnnotation
     private void privateDemo() {
         System.out.println("Rien c'est privé");
     }
