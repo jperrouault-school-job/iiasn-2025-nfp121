@@ -51,6 +51,9 @@
 		{
 			"name": "exo-thread-file-copy",
 			"path": "exo-thread-file-copy"
+		},
+		{
+			"path": "rappels-intermediaire-java"
 		}
 	],
 	"settings": {
