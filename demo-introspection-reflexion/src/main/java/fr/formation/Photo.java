@@ -13,6 +13,6 @@ public class Photo {
     }
 
     private void privateDemo() {
-        System.out.println("Rien");
+        System.out.println("Rien c'est privé");
     }
 }
