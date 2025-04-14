@@ -63,6 +63,9 @@
 		},
 		{
 			"path": "tp-interpretor-client"
+		},
+		{
+			"path": "demo-introspection-reflexion"
 		}
 	],
 	"settings": {
