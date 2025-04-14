@@ -54,6 +54,9 @@
 		},
 		{
 			"path": "rappels-intermediaire-java"
+		},
+		{
+			"path": "demo-tests"
 		}
 	],
 	"settings": {
