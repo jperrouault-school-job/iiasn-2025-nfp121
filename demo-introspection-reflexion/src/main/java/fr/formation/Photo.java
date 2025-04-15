@@ -8,12 +8,13 @@ public class Photo {
         this.title = title;
     }
 
-    @MonAnnotation
+    @Scheduled(fixedRate = 5)
     public void demo() {
         System.out.println("Rien");
     }
 
     @MonAnnotation
+    @Scheduled(fixedRate = 1)
     private void privateDemo() {
         System.out.println("Rien c'est privé");
     }
