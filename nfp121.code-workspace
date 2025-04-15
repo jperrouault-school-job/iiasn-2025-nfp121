@@ -66,6 +66,9 @@
 		},
 		{
 			"path": "demo-introspection-reflexion"
+		},
+		{
+			"path": "ioc-di"
 		}
 	],
 	"settings": {
