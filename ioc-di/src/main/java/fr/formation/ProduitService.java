@@ -2,8 +2,11 @@ package fr.formation;
 
 import java.util.List;
 
+
+@Component
 public class ProduitService {
     // Inversion of Control : ce n'est plus à ProduitService de gérer l'instance de sa dépendance
+    @Inject
     private ProduitRepository repository;
 
     public ProduitService() { }
