@@ -9,7 +9,8 @@ public class Factory {
 
     public static ProduitService createProduitService() {
         // Injection de dépendance par constructeur .. Le ProduitService a besoin d'un ProduitRepository
-        return new ProduitService(createProduitRepository());
+        // return new ProduitService(createProduitRepository());
+        return new ProduitService();
     }
 
     public static ProduitController createProduitController() {

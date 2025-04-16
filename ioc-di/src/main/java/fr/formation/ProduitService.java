@@ -17,9 +17,9 @@ public class ProduitService {
 
     public ProduitService() { }
 
-    public ProduitService(ProduitRepository repository) {
-        this.repository = repository;
-    }
+    // public ProduitService(ProduitRepository repository) {
+    //     this.repository = repository;
+    // }
 
     public void setProduitRepository(ProduitRepository repository) {
         this.repository = repository;
