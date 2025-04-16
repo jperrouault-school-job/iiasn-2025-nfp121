@@ -1,4 +1,4 @@
-package fr.formation;
+package fr.formation.controller;
 
 import java.util.List;
 
@@ -9,6 +9,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import fr.formation.controller.ProduitController;
+import fr.formation.model.Produit;
+import fr.formation.service.ProduitService;
 
 @ExtendWith(MockitoExtension.class) // On exécute le test avec Mockito
 class ProduitControllerTest {

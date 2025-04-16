@@ -1,4 +1,4 @@
-package fr.formation;
+package fr.formation.http;
 
 import java.io.IOException;
 import java.net.URI;

@@ -1,4 +1,4 @@
-package fr.formation;
+package fr.formation.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -6,6 +6,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import fr.formation.http.JsonHttpClient;
+import fr.formation.repo.ProduitRepository;
+import fr.formation.service.ProduitService;
 
 @ExtendWith(MockitoExtension.class)
 class ProduitServiceTest {

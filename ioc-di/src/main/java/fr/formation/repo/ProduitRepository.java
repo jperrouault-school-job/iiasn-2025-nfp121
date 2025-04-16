@@ -1,8 +1,9 @@
-package fr.formation;
+package fr.formation.repo;
 
 import java.util.List;
 
 import fr.formation.annotation.Component;
+import fr.formation.model.Produit;
 
 
 @Component

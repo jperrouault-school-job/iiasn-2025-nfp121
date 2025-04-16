@@ -1,9 +1,12 @@
-package fr.formation;
+package fr.formation.service;
 
 import java.util.List;
 
 import fr.formation.annotation.Component;
 import fr.formation.annotation.Inject;
+import fr.formation.http.JsonHttpClient;
+import fr.formation.model.Produit;
+import fr.formation.repo.ProduitRepository;
 
 
 @Component

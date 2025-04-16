@@ -1,4 +1,4 @@
-package fr.formation;
+package fr.formation.core;
 
 import lombok.extern.log4j.Log4j2;
 

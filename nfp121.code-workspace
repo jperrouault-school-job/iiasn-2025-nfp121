@@ -72,6 +72,9 @@
 		},
 		{
 			"path": "demo-spring-ioc-di"
+		},
+		{
+			"path": "http-server"
 		}
 	],
 	"settings": {

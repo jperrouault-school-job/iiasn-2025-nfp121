@@ -1,8 +1,9 @@
-package fr.formation;
+package fr.formation.core;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class ApplicationContext {
-    private Map<Class<?>, Object> instances = new HashMap<>();
+    protected Map<Class<?>, Object> instances = new HashMap<>();
     
     public ApplicationContext() {
         // Créer les instances ....
@@ -26,8 +27,18 @@ public class ApplicationContext {
 
         log.debug("Création des instances : {}", classes);
 
+        this.instances.put(this.getClass(), this);
+
         for (Class<?> clz : classes) {
-            if (clz.isAnnotationPresent(Component.class)) {
+            Annotation componentAnnotation = null;
+
+            for (Annotation annotation : clz.getAnnotations()) {
+                if (annotation.annotationType().isAnnotationPresent(Component.class)) {
+                    componentAnnotation = annotation;
+                }
+            }
+            
+            if (!clz.isAnnotation() && (componentAnnotation != null || clz.isAnnotationPresent(Component.class))) {
                 instances.put(clz, BeanFactory.createBean(clz));
             }
 
@@ -88,7 +99,7 @@ public class ApplicationContext {
         return (T)this.instances.get(clz);
     }
 
-    private List<Class<?>> findAllClasses(String packageName) {
+    protected List<Class<?>> findAllClasses(String packageName) {
         List<Class<?>> classes = new ArrayList<>();
         InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(packageName.replaceAll("[.]", "/"));
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -114,5 +125,4 @@ public class ApplicationContext {
 
         return classes;
     }
-
 }
