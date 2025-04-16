@@ -2,6 +2,8 @@ package fr.formation;
 
 import java.util.List;
 
+import fr.formation.annotation.Component;
+
 
 @Component
 public class ProduitRepository {

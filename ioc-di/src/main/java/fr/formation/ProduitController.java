@@ -2,6 +2,9 @@ package fr.formation;
 
 import java.util.List;
 
+import fr.formation.annotation.Component;
+import fr.formation.annotation.Inject;
+
 @Component
 public class ProduitController {
     // Inversion of Control : ce n'est plus à ProduitController de gérer l'instance de sa dépendance

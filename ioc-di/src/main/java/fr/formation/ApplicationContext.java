@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fr.formation.annotation.Component;
+import fr.formation.annotation.Configuration;
+import fr.formation.annotation.Inject;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -17,12 +20,16 @@ public class ApplicationContext {
     
     public ApplicationContext() {
         // Créer les instances ....
-        List<Class<?>> classes = this.findAllClasses();
+        List<Class<?>> classes = this.findAllClasses("fr.formation");
 
         log.debug("Création des instances : {}", classes);
 
         for (Class<?> clz : classes) {
             if (clz.isAnnotationPresent(Component.class)) {
+                instances.put(clz, BeanFactory.createBean(clz));
+            }
+
+            if (clz.isAnnotationPresent(Configuration.class)) {
                 instances.put(clz, BeanFactory.createBean(clz));
             }
         }
@@ -63,19 +70,27 @@ public class ApplicationContext {
         return (T)this.instances.get(clz);
     }
 
-    private List<Class<?>> findAllClasses() {
-        String packageName = "fr.formation";
+    private List<Class<?>> findAllClasses(String packageName) {
         List<Class<?>> classes = new ArrayList<>();
         InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(packageName.replaceAll("[.]", "/"));
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
         for (String line : reader.lines().toList()) {
+            if (!line.endsWith(".class")) { // Répertoire ... donc sous-package !
+                classes.addAll(this.findAllClasses(packageName + "." + line));
+                continue;
+            }
+
             String className = line.substring(0, line.length() - 6);
 
             try {
                 Class<?> clz = Class.forName(packageName + "." + className);
 
                 if (clz.isAnnotationPresent(Component.class)) {
+                    classes.add(clz);
+                }
+
+                if (clz.isAnnotationPresent(Configuration.class)) {
                     classes.add(clz);
                 }
             }
