@@ -4,11 +4,13 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fr.formation.annotation.Bean;
 import fr.formation.annotation.Component;
 import fr.formation.annotation.Configuration;
 import fr.formation.annotation.Inject;
@@ -29,8 +31,24 @@ public class ApplicationContext {
                 instances.put(clz, BeanFactory.createBean(clz));
             }
 
-            if (clz.isAnnotationPresent(Configuration.class)) {
-                instances.put(clz, BeanFactory.createBean(clz));
+            else if (clz.isAnnotationPresent(Configuration.class)) {
+                Object config = BeanFactory.createBean(clz);
+                instances.put(clz, config);
+
+                for (Method m : clz.getDeclaredMethods()) {
+                    if (m.isAnnotationPresent(Bean.class)) {
+                        m.setAccessible(true);
+
+                        try {
+                            instances.put(m.getReturnType(), m.invoke(config));
+                            log.debug("Méthode {} exécutée et instance {} récupérée !", m.getName(), m.getReturnType().getSimpleName());
+                        }
+
+                        catch (Exception e) {
+                            log.error("Impossible d'exécuter la méthode {} : {}", m.getName(), e.getMessage());
+                        }
+                    }
+                }
             }
         }
 
@@ -39,8 +57,8 @@ public class ApplicationContext {
         // La dépendance correspondante
         // On peut connaitre le type de dépendance grâce à field.getType()
 
-        for (Class<?> clz : classes) {
-            for (Field f : clz.getDeclaredFields()) {
+        for (Object instance : instances.values()) {
+            for (Field f : instance.getClass().getDeclaredFields()) {
                 if (f.isAnnotationPresent(Inject.class)) {
                     log.debug("Injection d'une dépendance de type {} ...", f.getType().getSimpleName());
 
@@ -54,7 +72,7 @@ public class ApplicationContext {
                     f.setAccessible(true);
 
                     try {
-                        f.set(instances.get(clz), dependency);
+                        f.set(instance, dependency);
                     }
 
                     catch (Exception e) {
@@ -86,13 +104,7 @@ public class ApplicationContext {
             try {
                 Class<?> clz = Class.forName(packageName + "." + className);
 
-                if (clz.isAnnotationPresent(Component.class)) {
-                    classes.add(clz);
-                }
-
-                if (clz.isAnnotationPresent(Configuration.class)) {
-                    classes.add(clz);
-                }
+                classes.add(clz);
             }
 
             catch (Exception e) {
