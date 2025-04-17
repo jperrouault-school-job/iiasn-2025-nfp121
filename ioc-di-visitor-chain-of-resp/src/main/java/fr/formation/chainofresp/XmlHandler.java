@@ -21,7 +21,7 @@ public class XmlHandler extends AbstractHandler {
             log.debug("XML est responsable !");
 
             return HttpResponse.builder()
-                .contentType(HttpContentType.TEXT_HTML)
+                .contentType(HttpContentType.APPLICATION_XML)
                 .content(this.visitor.visit(result))
                 .build()
             ;
