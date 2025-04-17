@@ -81,6 +81,9 @@
 		},
 		{
 			"path": "ioc-di-visitor-chain-of-resp"
+		},
+		{
+			"path": "levenshtein"
 		}
 	],
 	"settings": {
