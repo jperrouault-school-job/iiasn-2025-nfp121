@@ -75,6 +75,9 @@
 		},
 		{
 			"path": "http-server"
+		},
+		{
+			"path": "ioc-di-visitor"
 		}
 	],
 	"settings": {
