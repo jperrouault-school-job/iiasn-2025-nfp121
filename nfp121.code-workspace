@@ -78,6 +78,9 @@
 		},
 		{
 			"path": "ioc-di-visitor"
+		},
+		{
+			"path": "ioc-di-visitor-chain-of-resp"
 		}
 	],
 	"settings": {

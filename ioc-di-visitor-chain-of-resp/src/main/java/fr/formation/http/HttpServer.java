@@ -6,15 +6,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.List;
 
 import fr.formation.annotation.Component;
 import fr.formation.annotation.Inject;
+import fr.formation.chainofresp.HtmlHandler;
+import fr.formation.chainofresp.JsonHandler;
+import fr.formation.chainofresp.XmlHandler;
 import fr.formation.core.WebApplicationContext;
 import fr.formation.core.WebApplicationContext.WebMethod;
-import fr.formation.visitor.HtmlVisitor;
-import fr.formation.visitor.JsonVisitor;
-import fr.formation.visitor.XmlVisitor;
 import lombok.extern.log4j.Log4j2;
 
 @Component
@@ -22,18 +21,25 @@ import lombok.extern.log4j.Log4j2;
 public class HttpServer {
     @Inject
     private WebApplicationContext ctx;
-
+    
     @Inject
-    private JsonVisitor jsonVisitor;
-
+    private JsonHandler jsonHandler;
+    
     @Inject
-    private XmlVisitor xmlVisitor;
-
+    private XmlHandler xmlHandler;
+    
     @Inject
-    private HtmlVisitor htmlVisitor;
+    private HtmlHandler htmlHandler;
 
     public void listen() {
         log.debug("Démarrage du serveur sur le port 80 ...");
+
+        log.debug("Configuration des handlers pour la réponse (JSON, XML et HTML) ...");
+
+        jsonHandler
+            .chain(xmlHandler)
+            .chain(htmlHandler)
+        ;
 
         try (ServerSocket server = new ServerSocket(80)) {
             log.debug("Serveur démarré et en écoute !");
@@ -53,7 +59,7 @@ public class HttpServer {
                         .status(HttpResponseStatus.OK)
                         .build()
                     ;
-            
+
                     System.out.println(requestLine);
         
                     if (requestLine != null) {
@@ -63,19 +69,21 @@ public class HttpServer {
                         WebMethod webMethod = this.ctx.getMethods().get(path);
 
                         if (webMethod != null) {
-                            StringBuilder sb = new StringBuilder();
                             Object result = webMethod.invoke();
+                            
+                            response = jsonHandler.handle(webMethod, result);
 
-                            sb.append(this.jsonVisitor.visit(result));
-                            sb.append(this.xmlVisitor.visit(result));
-
-                            if (result instanceof List resultList) {
-                                sb.append(this.htmlVisitor.visit(resultList));
+                            if (response == null) {
+                                response = HttpResponse.builder()
+                                    .contentType(HttpContentType.TEXT_HTML)
+                                    .status(HttpResponseStatus.NOT_FOUND)
+                                    .build()
+                                ;
                             }
 
-                            // response.setContentType(HttpContentType.APPLICATION_JSON);
-                            // response.setContent(this.mapper.writeValueAsString(result));
-                            response.setContent(sb.toString());
+                            else {
+                                response.setStatus(HttpResponseStatus.OK);
+                            }
                         }
 
                         else {
