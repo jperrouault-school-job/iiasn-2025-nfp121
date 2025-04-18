@@ -3,6 +3,8 @@ package fr.formation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import fr.formation.builder.DemoBuilder;
 import fr.formation.generic.DemoGeneric;
@@ -12,11 +14,12 @@ import fr.formation.proxy.ProduitServiceProxy;
 import fr.formation.singleton.DemoSingleton;
 
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // singleton();
         // builder();
         // proxy();
-        generic();
+        // generic();
+        multithreading();
     }
 
     public static void singleton() {
@@ -62,5 +65,29 @@ public class Application {
 
         DemoMethodGeneric dmg = new DemoMethodGeneric();
         dmg.demo(String.class);
+    }
+
+    public static void multithreading() {
+        System.out.println(Thread.currentThread().getName());
+
+        // Thread Pool
+        
+        ExecutorService threadPool = Executors.newFixedThreadPool(2);
+
+        threadPool.submit(() -> {
+            System.out.println(Thread.currentThread().getName());
+        });
+
+        threadPool.submit(() -> {
+            System.out.println(Thread.currentThread().getName());
+        });
+
+        threadPool.submit(() -> {
+            System.out.println(Thread.currentThread().getName());
+        });
+        
+        new Thread(() -> {
+            System.out.println(Thread.currentThread().getName());
+        }).start();
     }
 }
